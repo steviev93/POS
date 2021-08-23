@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
       <ImageView blendMode="SRC_ATOP" fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
@@ -20,7 +19,7 @@
             <Image url="@../Images/burger-background.jpg" />
          </image>
       </ImageView>
-      <GridPane layoutX="202.0" layoutY="179.0" prefHeight="130.0" prefWidth="296.0" style="-fx-background-color: rgba(0,0,0,.5);">
+      <GridPane layoutX="202.0" layoutY="179.0" prefHeight="153.0" prefWidth="296.0" style="-fx-background-color: rgba(0,0,0,.5);">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="118.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="104.0" />
@@ -28,23 +27,23 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField promptText="Username" style="-fx-background-color: rgb(255,255,255);" GridPane.columnIndex="1" GridPane.columnSpan="2">
+            <TextField fx:id="username" promptText="Username" style="-fx-background-color: rgb(255,255,255);" GridPane.columnIndex="1" GridPane.columnSpan="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </TextField>
-            <PasswordField prefHeight="26.0" prefWidth="150.0" promptText="Password" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <PasswordField fx:id="password" prefHeight="26.0" prefWidth="150.0" promptText="Password" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </PasswordField>
             <Label text="Username:  " textFill="WHITE" />
             <Label text="Password:  " textFill="WHITE" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="299.0" style="-fx-background-color: rgb(255,0,0);" text="Login" textFill="WHITE" GridPane.columnSpan="3" GridPane.rowIndex="2">
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="31.0" prefWidth="286.0" style="-fx-background-color: rgb(255,0,0);" text="Login" textFill="WHITE" GridPane.columnSpan="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
@@ -54,5 +53,6 @@
             <Insets />
          </opaqueInsets>
       </GridPane>
+      <Label fx:id="loginLabel" layoutX="202.0" layoutY="345.0" prefHeight="18.0" prefWidth="296.0" textFill="#be1e1e" />
    </children>
 </AnchorPane>
