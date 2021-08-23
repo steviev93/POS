@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controllers.MainWindowController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Employee">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Clock-in/out" />
+                  <MenuItem mnemonicParsing="false" text="Schedule" />
+                  <MenuItem mnemonicParsing="false" text="History" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu fx:id="AdminMenu" mnemonicParsing="false" text="Admin" visible="false">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Update Items" />
+                  <MenuItem mnemonicParsing="false" text="Employee Information" />
+                  <MenuItem mnemonicParsing="false" text="Inventory Management" />
+                  <MenuItem mnemonicParsing="false" text="Sales" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Logout" />
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane prefHeight="543.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Burgers">
+            <FlowPane alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Hamburger" wrapText="true" />
+                     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Cheeseburger" wrapText="true" />
+                     <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Double Hamburger" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Double Cheeseburger" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="370.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Bacon Burger" />
+                     <Button layoutX="490.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chipotle Burger" />
+                     <Button layoutX="10.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Hangover" />
+                     <Button layoutX="130.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Impossible Burger" />
+                     <Button layoutX="250.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Veggie Burger" />
+                     <Button layoutX="370.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Black Bean Burger" />
+                  </children>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></FlowPane>
+          </Tab>
+          <Tab text="Chicken">
+              <FlowPane alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chicken Sandwich" wrapText="true" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Grilled Chicken Sandwich" textAlignment="CENTER" wrapText="true" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Buffalo Chicken Sandwich" textAlignment="CENTER" wrapText="true" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chicken Bacon Ranch" textAlignment="CENTER" wrapText="true" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Avocado Chicken" textAlignment="CENTER" wrapText="true" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chipotle Chicken" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Clucker" />
+                     <Button layoutX="388.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Vegan Chicken" />
+                     <Button layoutX="458.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chicken Parmesan" />
+                  </children>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></FlowPane>
+          </Tab>
+            <Tab text="Drinks">
+                <FlowPane alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+                  <children>
+                     <Button layoutX="178.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="S Fountain Drink" />
+                     <Button layoutX="458.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="M Fountain Drink" />
+                     <Button layoutX="108.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="L Fountain Drink" />
+                     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Bottled Water" />
+                     <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Coffee" />
+                     <Button layoutX="248.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Strawberry Smoothie" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="318.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Banana Smoothie" textAlignment="CENTER" wrapText="true" />
+                  </children>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></FlowPane>
+            </Tab>
+            <Tab text="Sides">
+                <FlowPane alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Fries" />
+                     <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Cajun Fries" />
+                     <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Loaded Fries" />
+                     <Button layoutX="370.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Onion Rings" />
+                     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Tots" />
+                     <Button layoutX="10.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Loaded Tots" />
+                     <Button layoutX="130.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Mac n' Cheese Bites" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="250.0" layoutY="90.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Jalapeño Poppers" textAlignment="CENTER" wrapText="true" />
+                  </children>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></FlowPane>
+            </Tab>
+            <Tab text="Desserts">
+                <FlowPane alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chocolate Shake" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Vanilla Shake" />
+                     <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Apple Pie" />
+                     <Button layoutX="388.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Chocolate Chip Cookie" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="458.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Brownie" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="248.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Churro" textAlignment="CENTER" wrapText="true" />
+                     <Button layoutX="318.0" layoutY="130.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" text="Cheesecake Bites" textAlignment="CENTER" wrapText="true" />
+                  </children>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></FlowPane>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <right>
+      <BorderPane prefHeight="349.0" prefWidth="237.0" style="-fx-background-color: rgb(200,200,200);" BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="223.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Items Ordered" />
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <TableView prefHeight="200.0" prefWidth="223.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="159.0" text="Item" />
+                <TableColumn prefWidth="68.0" text="Price" />
+              </columns>
+            </TableView>
+         </center>
+         <bottom>
+            <SplitPane dividerPositions="0.5287610619469026" prefHeight="45.0" prefWidth="228.0" BorderPane.alignment="CENTER">
+               <items>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Submit Order" />
+                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="103.0" text="Delete Items" />
+               </items>
+            </SplitPane>
+         </bottom>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </padding>
+      </BorderPane>
+   </right>
+</BorderPane>
