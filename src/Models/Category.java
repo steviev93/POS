@@ -7,4 +7,12 @@ public class Category {
     public Category(String c) {
         this.categoryName = c;
     }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
