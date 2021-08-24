@@ -2,9 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -15,34 +15,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Employee">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Clock-in/out" />
-                  <MenuItem mnemonicParsing="false" text="Schedule" />
-                  <MenuItem mnemonicParsing="false" text="History" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-            <Menu fx:id="AdminMenu" mnemonicParsing="false" text="Admin" visible="false">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Update Items" />
-                  <MenuItem mnemonicParsing="false" text="Employee Information" />
-                  <MenuItem mnemonicParsing="false" text="Inventory Management" />
-                  <MenuItem mnemonicParsing="false" text="Sales" />
-               </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Logout" />
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainWindowController">
    <center>
       <TabPane prefHeight="543.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" BorderPane.alignment="CENTER">
         <tabs>
@@ -160,4 +133,30 @@
          </padding>
       </BorderPane>
    </right>
+   <top>
+      <ButtonBar fx:id="ButtonBar" buttonMinWidth="120.0" prefHeight="60.0" prefWidth="833.0" BorderPane.alignment="CENTER_LEFT">
+        <buttons>
+            <MenuButton fx:id="AdminMenu" layoutX="588.0" layoutY="20.0" mnemonicParsing="false" prefHeight="40.0" text="Admin" visible="false">
+               <items>
+                  <MenuItem fx:id="UpdateMenuButton" mnemonicParsing="false" onAction="#UpdateMenuButtonOnAction" text="Update Menu" />
+                  <MenuItem fx:id="EmployeeInfoButton" mnemonicParsing="false" onAction="#EmployeeInfoButtonOnAction" text="Employee Information" />
+                  <MenuItem fx:id="InventoryMgmtButton" mnemonicParsing="false" onAction="#InventoryMgmtButtonOnAction" text="Inventory Management" />
+                  <MenuItem fx:id="SalesButton" mnemonicParsing="false" onAction="#SalesButtonOnAction" text="Sales" />
+               </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefHeight="40.0" text="Employee">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Clock-in/out" />
+                <MenuItem mnemonicParsing="false" text="Schedule" />
+                  <MenuItem mnemonicParsing="false" text="History" />
+              </items>
+            </MenuButton>
+          <Button mnemonicParsing="false" prefHeight="40.0" text="Help" />
+            <Button fx:id="logoutButton" layoutX="718.0" layoutY="20.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="40.0" text="Logout" />
+        </buttons>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </ButtonBar>
+   </top>
 </BorderPane>
