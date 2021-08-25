@@ -13,23 +13,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateMenuController">
    <center>
-      <TableView prefHeight="351.0" prefWidth="187.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="ProductTable" prefHeight="351.0" prefWidth="187.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="44.0" text="Id" />
-          <TableColumn prefWidth="106.0" text="Product Name" />
-            <TableColumn prefWidth="75.0" text="Price" />
-            <TableColumn prefWidth="46.0" text="CatId" />
+          <TableColumn fx:id="ProductId" prefWidth="44.0" text="Id" />
+          <TableColumn fx:id="ProductName" prefWidth="106.0" text="Product Name" />
+            <TableColumn fx:id="ProductPrice" prefWidth="75.0" text="Price" />
+            <TableColumn fx:id="ProductCategoryId" prefWidth="46.0" text="CatId" />
         </columns>
       </TableView>
    </center>
    <right>
-      <TableView prefHeight="411.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="CategoryTable" prefHeight="411.0" prefWidth="165.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="39.0" text="Id" />
-          <TableColumn prefWidth="125.0" text="Category Name" />
+          <TableColumn fx:id="CategoryId" prefWidth="39.0" text="Id" />
+          <TableColumn fx:id="CategoryName" prefWidth="125.0" text="Category Name" />
         </columns>
       </TableView>
    </right>
@@ -40,15 +39,15 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="41.0" prefWidth="322.0">
                      <children>
-                        <Button layoutX="86.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" text="Update" />
-                        <Button layoutX="181.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" text="Delete" />
-                        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" text="Add" />
+                        <Button fx:id="UpdateProductButton" layoutX="86.0" layoutY="8.0" mnemonicParsing="false" onAction="#UpdateProductButtonOnAction" prefHeight="30.0" text="Update" />
+                        <Button fx:id="DeleteProductButton" layoutX="181.0" layoutY="8.0" mnemonicParsing="false" onAction="#DeleteProductButtonOnAction" prefHeight="30.0" text="Delete" />
+                        <Button fx:id="AddProductButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#AddProductButtonOnAction" prefHeight="30.0" text="Add" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Button layoutX="89.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" text="Update" />
-                        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" text="Add" />
+                        <Button fx:id="DeleteCategoryButton" layoutX="89.0" layoutY="8.0" mnemonicParsing="false" onAction="#DeleteCategoryButtonOnAction" prefHeight="30.0" text="Delete" />
+                        <Button fx:id="AddCategoryButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#AddCategoryButtonOnAction" prefHeight="30.0" text="Add" />
                      </children>
                   </AnchorPane>
               </items>

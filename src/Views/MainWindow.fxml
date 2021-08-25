@@ -136,7 +136,7 @@
    <top>
       <ButtonBar fx:id="ButtonBar" buttonMinWidth="120.0" prefHeight="60.0" prefWidth="833.0" BorderPane.alignment="CENTER_LEFT">
         <buttons>
-            <MenuButton fx:id="AdminMenu" layoutX="588.0" layoutY="20.0" mnemonicParsing="false" prefHeight="40.0" text="Admin" visible="false">
+            <MenuButton fx:id="AdminMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="588.0" layoutY="20.0" mnemonicParsing="false" prefHeight="40.0" text="Admin">
                <items>
                   <MenuItem fx:id="UpdateMenuButton" mnemonicParsing="false" onAction="#UpdateMenuButtonOnAction" text="Update Menu" />
                   <MenuItem fx:id="EmployeeInfoButton" mnemonicParsing="false" onAction="#EmployeeInfoButtonOnAction" text="Employee Information" />
@@ -144,7 +144,7 @@
                   <MenuItem fx:id="SalesButton" mnemonicParsing="false" onAction="#SalesButtonOnAction" text="Sales" />
                </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" prefHeight="40.0" text="Employee">
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" text="Employee">
               <items>
                 <MenuItem mnemonicParsing="false" text="Clock-in/out" />
                 <MenuItem mnemonicParsing="false" text="Schedule" />
@@ -155,7 +155,7 @@
             <Button fx:id="logoutButton" layoutX="718.0" layoutY="20.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="40.0" text="Logout" />
         </buttons>
          <padding>
-            <Insets right="5.0" />
+            <Insets right="10.0" />
          </padding>
       </ButtonBar>
    </top>

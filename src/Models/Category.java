@@ -1,11 +1,22 @@
 package Models;
 
 public class Category {
+
+    private int idCategory;
     private String categoryName;
 
 
-    public Category(String c) {
+    public Category(int id, String c) {
+        this.idCategory = id;
         this.categoryName = c;
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getCategoryName() {

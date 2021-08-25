@@ -1,14 +1,13 @@
 package DAO;
 
 import Models.Category;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class CategoryDAO {
     private Connection connection;
@@ -21,8 +20,8 @@ public class CategoryDAO {
 
     public boolean Create(Category category) throws SQLException {
 
-        String createStatement = "INSERT INTO Category VALUES (" +
-                category.getCategoryName() + ")";
+        String createStatement = "INSERT INTO Category(Name) VALUES ('" +
+                category.getCategoryName() + "')";
 
         try {
             Statement statement = connection.createStatement();
@@ -36,16 +35,18 @@ public class CategoryDAO {
         }
         return false;
     }
-    public List<Category> Read() throws SQLException {
+    public ObservableList<Category> Read() throws SQLException {
 
         String createStatement = "SELECT * FROM Category";
-        List<Category> result = new ArrayList<>();
+        ObservableList<Category> result = FXCollections.observableArrayList();
 
         try {
             Statement statement = connection.createStatement();
             ResultSet queryResult = statement.executeQuery(createStatement);
             while(queryResult.next()) {
-                result.add(new Category(queryResult.getString("Name")));
+                result.add(new Category(
+                        queryResult.getInt("idCategory"),
+                        queryResult.getString("Name")));
             }
 
             return result;
@@ -54,7 +55,7 @@ public class CategoryDAO {
             e.printStackTrace();
             e.getCause();
         }
-        return Collections.emptyList();
+        return FXCollections.observableArrayList();
     }
 
 
