@@ -35,6 +35,7 @@ public class ProductController {
         Integer catId = Integer.parseInt(ProductCategoryIdText.getText());
         Product newProduct = new Product(-1, name,price,catId);
         boolean result = productDAO.Create(newProduct);
+
         if (result) {
             ((Stage)AddProductButton.getScene().getWindow()).close();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Admin/UpdateMenuView.fxml"));

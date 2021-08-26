@@ -50,7 +50,7 @@ public class LoginController {
             currentStage.close();
             FXMLLoader loader = new FXMLLoader(
                     getClass().getClassLoader().getResource(
-                            "Views/MainWindow.fxml"
+                            "Views/MainWindow1.fxml"
                     )
             );
 
@@ -64,7 +64,7 @@ public class LoginController {
             if (result.isAdmin()) {
                 controller.AdminMenu.setVisible(true);
             }
-
+            stage.setMaximized(true);
             stage.show();
 
         }
