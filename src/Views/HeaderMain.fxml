@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane prefHeight="63.0" prefWidth="1046.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HeaderController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="556.4308776855469" minWidth="10.0" prefWidth="381.95245361328125" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="802.4628295898438" minWidth="10.0" prefWidth="664.0475463867188" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label fx:id="RestaurantNameLabel" prefHeight="46.0" prefWidth="463.0" text="Stevie's Food Shack">
+            <font>
+                <Font size="37.0" />
+            </font>
+            <GridPane.margin>
+                <Insets left="10.0" />
+            </GridPane.margin>
+        </Label>
+        <ButtonBar fx:id="ButtonBar" buttonMinWidth="120.0" prefHeight="63.0" prefWidth="671.0" GridPane.columnIndex="1">
+            <buttons>
+                <MenuButton fx:id="AdminMenu" alignment="CENTER" contentDisplay="CENTER" visible="false" layoutX="588.0" layoutY="20.0" mnemonicParsing="false" prefHeight="40.0" text="Admin">
+                    <items>
+                        <MenuItem fx:id="UpdateMenuButton" mnemonicParsing="false" onAction="#UpdateMenuButtonOnAction" text="Update Menu" />
+                        <MenuItem fx:id="EmployeeInfoButton" mnemonicParsing="false" onAction="#EmployeeInfoButtonOnAction" text="Employee Information" />
+                        <MenuItem fx:id="InventoryMgmtButton" mnemonicParsing="false" onAction="#InventoryMgmtButtonOnAction" text="Inventory Management" />
+                        <MenuItem fx:id="SalesButton" mnemonicParsing="false" onAction="#SalesButtonOnAction" text="Sales" />
+                    </items>
+                </MenuButton>
+                <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" text="Employee">
+                    <items>
+                        <MenuItem fx:id="ClockButton" mnemonicParsing="false" onAction="#ClockButtonOnAction" text="Clock-in/out" />
+                        <MenuItem fx:id="ScheduleButton" mnemonicParsing="false" onAction="#ScheduleButtonOnAction" text="Schedule" />
+                        <MenuItem fx:id="HistoryButton" mnemonicParsing="false" onAction="#HistoryButtonOnAction" text="History" />
+                    </items>
+                </MenuButton>
+                <Button mnemonicParsing="false" prefHeight="40.0" text="Help" />
+                <Button fx:id="logoutButton" layoutX="718.0" layoutY="20.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="40.0" text="Logout" />
+            </buttons>
+            <padding>
+                <Insets right="10.0" />
+            </padding>
+        </ButtonBar>
+    </children>
+</GridPane>

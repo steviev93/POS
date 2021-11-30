@@ -64,5 +64,38 @@ public class ProductDAO {
         return FXCollections.observableArrayList();
     }
 
+    public boolean Update(Product product) {
+            String updateStatement = "UPDATE Items SET Name = " +
+                    product.getName() + ", Price = " + product.getPrice() + " WHERE idItems = " + product.getId();
+            try {
+                Statement statement = connection.createStatement();
+                int result = statement.executeUpdate(updateStatement);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+                return false;
+            }
+
+        return true;
+    }
+
+
+    public boolean Delete(ObservableList<Product> products) {
+        for (Product p : products) {
+            String deleteStatement = "DELETE FROM Items WHERE idItems = " + p.getId();
+            try {
+                Statement statement = connection.createStatement();
+                int result = statement.executeUpdate(deleteStatement);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+                return false;
+            }
+
+        }
+        return true;
+    }
 
 }

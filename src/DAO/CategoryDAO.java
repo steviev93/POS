@@ -37,12 +37,12 @@ public class CategoryDAO {
     }
     public ObservableList<Category> Read() throws SQLException {
 
-        String createStatement = "SELECT * FROM Category";
+        String readStatement = "SELECT * FROM Category";
         ObservableList<Category> result = FXCollections.observableArrayList();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet queryResult = statement.executeQuery(createStatement);
+            ResultSet queryResult = statement.executeQuery(readStatement);
             while(queryResult.next()) {
                 result.add(new Category(
                         queryResult.getInt("idCategory"),
@@ -56,6 +56,21 @@ public class CategoryDAO {
             e.getCause();
         }
         return FXCollections.observableArrayList();
+    }
+
+    public boolean Delete(Category category) throws SQLException {
+        String deleteStatement = "DELETE FROM Category WHERE idCategory = " + category.getIdCategory();
+        try {
+            Statement statement = connection.createStatement();
+            int result = statement.executeUpdate(deleteStatement);
+            if (result == 1) return true;
+            else return false;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+        return false;
     }
 
 

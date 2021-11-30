@@ -41,7 +41,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </PasswordField>
-            <Label text="Username:  " textFill="WHITE" />
+            <Label text="EmployeeID:" textFill="WHITE" />
             <Label text="Password:  " textFill="WHITE" GridPane.rowIndex="1" />
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="31.0" prefWidth="286.0" style="-fx-background-color: rgb(255,0,0);" text="Login" textFill="WHITE" GridPane.columnSpan="3" GridPane.rowIndex="2">
                <GridPane.margin>

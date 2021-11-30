@@ -2,6 +2,7 @@ package Controllers;
 
 import DAO.LoginDAO;
 import Models.Credentials;
+import Utilities.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
-
-
-public class LoginController {
+public class LoginController implements IController {
 
     @FXML
     private TextField username;
@@ -35,7 +34,15 @@ public class LoginController {
 
     @FXML
     public void loginButtonOnAction(ActionEvent event) throws InterruptedException, IOException {
-
+        loginLabel.setText("");
+        if (!Validator.validateID(username.getText())) {
+            loginLabel.setText(loginLabel.getText() + "Employee ID must be a number only \n");
+            return;
+        }
+        if (!Validator.validatePassword(password.getText())) {
+            loginLabel.setText(loginLabel.getText() + "Invalid password \n");
+            return;
+        }
         LoginDAO loginDAO = null;
         try {
             loginDAO = new LoginDAO();
@@ -45,7 +52,8 @@ public class LoginController {
         Credentials result = loginDAO.validateLogin(username.getText(),password.getText());
         if (result.getEmployeeId() != "") {
             loginLabel.setText("Login Successful!");
-            TimeUnit.SECONDS.sleep(1);
+            loginLabel.setVisible(true);
+            TimeUnit.SECONDS.sleep(2);
             Stage currentStage = (Stage) loginButton.getScene().getWindow();
             currentStage.close();
             FXMLLoader loader = new FXMLLoader(
@@ -59,17 +67,17 @@ public class LoginController {
             stage.setScene(
                     new Scene(loader.load())
             );
-
-            MainWindowController controller = loader.getController();
-            if (result.isAdmin()) {
-                controller.AdminMenu.setVisible(true);
-            }
+            MainWindowController mwc = loader.getController();
+            mwc.loadCredentials(result);
             stage.setMaximized(true);
             stage.show();
 
         }
         else loginLabel.setText("Login Failed");
+    }
 
+    @Override
+    public void loadCredentials(Credentials c) {
     }
 
 }

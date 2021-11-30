@@ -1,4 +1,13 @@
 package Controllers;
 
-public class InventoryMgmtController {
+import Models.Credentials;
+
+public class InventoryMgmtController implements IController {
+    private Credentials credentials;
+
+    @Override
+    public void loadCredentials(Credentials c) {
+
+        credentials = c;
+    }
 }

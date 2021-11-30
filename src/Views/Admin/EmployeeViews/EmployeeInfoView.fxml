@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeControllers.EmployeeInfoController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Employees">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="EmployeeTable" prefHeight="315.0" prefWidth="930.0">
+              <columns>
+                  <TableColumn fx:id="IdCol" prefWidth="55.99367904663086" text="Id" />
+                <TableColumn fx:id="NameCol" prefWidth="185.99365234375" text="Name" />
+                <TableColumn fx:id="PhoneCol" prefWidth="149.00637817382812" text="Phone" />
+                  <TableColumn fx:id="EmailCol" prefWidth="225.5496826171875" text="Email" />
+                  <TableColumn fx:id="SinceCol" prefWidth="154.38482666015625" text="Employed Since" />
+                  <TableColumn fx:id="WageCol" minWidth="0.0" prefWidth="78.92822265625" text="Wage" />
+                  <TableColumn fx:id="TitleCol" prefWidth="55.58990478515625" text="Title Id" />
+              </columns>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </TableView>
+         </children>
+      </HBox>
+   </center>
+   <bottom>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="66.0" prefWidth="807.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="AddButton" mnemonicParsing="false" onAction="#AddButtonOnAction" prefHeight="65.0" prefWidth="140.0" text="Add Employee" />
+            <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#UpdateButtonOnAction" prefHeight="65.0" prefWidth="140.0" text="Update Employee" />
+            <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#DeleteButtonOnAction" prefHeight="65.0" prefWidth="140.0" text="Delete Employee" />
+            <Button fx:id="CancelButton" layoutX="563.0" layoutY="20.0" mnemonicParsing="false" onAction="#CancelButtonOnAction" prefHeight="65.0" prefWidth="140.0" text="Cancel" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </FlowPane>
+   </bottom>
+</BorderPane>
