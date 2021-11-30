@@ -7,14 +7,12 @@ import DAO.TitleDAO;
 import Models.Credentials;
 import Models.Employee;
 import Models.Title;
+import Utilities.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class EmployeeUpdateController implements Initializable, IController {
     @FXML
@@ -40,6 +39,8 @@ public class EmployeeUpdateController implements Initializable, IController {
     private ChoiceBox isAdminCBox = new ChoiceBox<>();
     @FXML
     private Button CancelButton;
+    @FXML
+    private Label validationLabel;
     private LoginDAO loginDAO;
     private EmployeeDAO employeeDAO;
     private TitleDAO titleDAO;
@@ -65,11 +66,15 @@ public class EmployeeUpdateController implements Initializable, IController {
             e.getErrorCode();
         }
     }
-    public void setUpdateEmployee(Employee e) {
-        employee = e;
-        isAdmin = credentials.isAdmin() ? 1 : 0;
+    public void setUpdateEmployee(Employee emp) {
+        employee = emp;
+        try {
+            isAdmin = loginDAO.getIsAdmin(emp.getEmployeeId()) ? 1 : 0;
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        }
         NameText.setText(employee.getEmployeeName());
-        PhoneText.setText(employee.getPhoneNumber());
+        PhoneText.setText(Pattern.compile("[\\D]").matcher(employee.getPhoneNumber()).replaceAll(""));
         EmailText.setText(employee.getEmail());
         SalaryText.setText(String.valueOf(employee.getHourlySalary()));
         System.out.println(titleList.get(employee.getTitleId()).getTitleName());
@@ -81,21 +86,23 @@ public class EmployeeUpdateController implements Initializable, IController {
     @FXML
     public void UpdateButtonOnAction() throws IOException, SQLException
     {
-        String name = NameText.getText();
-        String phone = PhoneText.getText();
-        String email = EmailText.getText();
-        Date since = new java.util.Date();
-        float salary = Float.parseFloat(SalaryText.getText());
-        Integer titleId = Integer.parseInt(TitleCBox.getValue().toString().substring(0,1));
-        Integer isAdmin = Integer.parseInt(isAdminCBox.getValue().toString().substring(0,1));
-        Employee newEmployee = new Employee(employee.getEmployeeId(), name,phone,email,since,salary,titleId);
-        boolean result = employeeDAO.Update(newEmployee);
-        boolean adminResult = loginDAO.UpdateIsAdmin(employee.getEmployeeId(), isAdmin);
+        if (validationLabel.getText() == "") {
+            String name = NameText.getText();
+            String phone = PhoneText.getText();
+            String email = EmailText.getText();
+            Date since = new java.util.Date();
+            float salary = Float.parseFloat(SalaryText.getText());
+            Integer titleId = Integer.parseInt(TitleCBox.getValue().toString().substring(0, 1));
+            Integer isAdmin = Integer.parseInt(isAdminCBox.getValue().toString().substring(0, 1));
+            Employee newEmployee = new Employee(employee.getEmployeeId(), name, phone, email, since, salary, titleId);
+            boolean result = employeeDAO.Update(newEmployee);
+            boolean adminResult = loginDAO.UpdateIsAdmin(employee.getEmployeeId(), isAdmin);
 
-        if (result ) {
-            Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-            currentStage.close();
+            if (result) {
+                Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+                currentStage.close();
 
+            }
         }
     }
 
@@ -103,6 +110,34 @@ public class EmployeeUpdateController implements Initializable, IController {
     public void CancelButtonOnAction() throws IOException {
         Stage currentStage = (Stage) CancelButton.getScene().getWindow();
         currentStage.close();
+    }
+    @FXML
+    public void phoneChanged() {
+
+        Validator.validatePhone(PhoneText, validationLabel);
+        PhoneText.positionCaret(PhoneText.getText().length());
+
+    }
+    @FXML
+    public void emailChanged() {
+
+        Validator.validateEmail(EmailText, validationLabel);
+        EmailText.positionCaret(EmailText.getText().length());
+
+    }
+    @FXML
+    public void salaryChanged() {
+
+        Validator.validateSalary(SalaryText, validationLabel);
+        SalaryText.positionCaret(SalaryText.getText().length());
+
+    }
+    @FXML
+    public void passwordChanged() {
+
+        Validator.validatePassword(Password.getText(), validationLabel);
+        SalaryText.positionCaret(SalaryText.getText().length());
+
     }
 
     @Override

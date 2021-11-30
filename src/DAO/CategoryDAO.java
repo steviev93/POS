@@ -4,10 +4,7 @@ import Models.Category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CategoryDAO {
     private Connection connection;
@@ -20,13 +17,12 @@ public class CategoryDAO {
 
     public boolean Create(Category category) throws SQLException {
 
-        String createStatement = "INSERT INTO Category(Name) VALUES ('" +
-                category.getCategoryName() + "')";
+        String createStatement = "INSERT INTO Category(Name) VALUES (?)";
+        PreparedStatement prepStmt = connection.prepareStatement(createStatement);
 
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(createStatement);
-
+            prepStmt.setString(1, category.getCategoryName());
+            prepStmt.executeUpdate();
             return true;
 
         } catch (Exception e) {
@@ -59,12 +55,12 @@ public class CategoryDAO {
     }
 
     public boolean Delete(Category category) throws SQLException {
-        String deleteStatement = "DELETE FROM Category WHERE idCategory = " + category.getIdCategory();
+        String sql = "DELETE FROM Category WHERE idCategory = ?";
+        PreparedStatement prepStmt = connection.prepareStatement(sql);
         try {
-            Statement statement = connection.createStatement();
-            int result = statement.executeUpdate(deleteStatement);
-            if (result == 1) return true;
-            else return false;
+            prepStmt.setInt(1, category.getIdCategory());
+            prepStmt.execute();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -57,7 +57,6 @@ public class EmployeeInfoController implements Initializable, IController {
         try {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             ObservableList<Employee> employeeData = employeeDAO.Read();
-            System.out.println(employeeData.get(0));
             IdCol.setCellValueFactory(new PropertyValueFactory<>("EmployeeId"));
             NameCol.setCellValueFactory(new PropertyValueFactory<>("EmployeeName"));
             PhoneCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
@@ -104,26 +103,28 @@ public class EmployeeInfoController implements Initializable, IController {
     }
     @FXML
     public void DeleteButtonOnAction(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) AddButton.getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getClassLoader().getResource(
-                        "Views/Admin/EmployeeViews/EmployeeViewDelete.fxml"
-                )
-        );
-
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(
-                new Scene((Parent)loader.load())
-        );
-
-        EmployeeDeleteController controller = loader.getController();
         Employee empDelete = (Employee) EmployeeTable.getSelectionModel().getSelectedItem();
+        if (!(empDelete == null)) {
+            Stage currentStage = (Stage) AddButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getClassLoader().getResource(
+                            "Views/Admin/EmployeeViews/EmployeeViewDelete.fxml"
+                    )
+            );
 
-        controller.setEmployee(empDelete);
-        controller.setEmployeeLabel(empDelete.getEmployeeName());
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(
+                    new Scene((Parent)loader.load())
+            );
 
-        stage.show();
+            EmployeeDeleteController controller = loader.getController();
+            controller.setEmployee(empDelete);
+            controller.setEmployeeLabel(empDelete.getEmployeeName());
+
+            stage.show();
+        }
+
     }
     @FXML
     public void CancelButtonOnAction() throws IOException {

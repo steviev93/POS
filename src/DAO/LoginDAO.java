@@ -2,10 +2,7 @@ package DAO;
 
 import Models.Credentials;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class LoginDAO {
 
@@ -15,17 +12,18 @@ public class LoginDAO {
         DBConnector connector = new DBConnector();
         this.connection = connector.getConnection();
     }
-    public boolean Create(String id, String password, int isAdmin) throws SQLException {
+    public boolean Create(String id, String password, int isAdmin) {
 
-        String createStatement = "INSERT INTO LoginCredentials(EmployeeId,EmployeePass,isAdmin) VALUES (" +
-                id + ", sha2('" +
-                password + "', 512), " +
-                isAdmin + ")";
+        String createStatement = "INSERT INTO LoginCredentials(EmployeeId,EmployeePass,isAdmin) " +
+                "VALUES (?, sha2(?, 512), " +
+                "?)";
 
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(createStatement);
-
+            PreparedStatement prepStmt = connection.prepareStatement(createStatement);
+            prepStmt.setInt(1, Integer.parseInt(id));
+            prepStmt.setString(2, password);
+            prepStmt.setBoolean(3, isAdmin == 1? true:false);
+            prepStmt.executeUpdate();
             return true;
 
         } catch (Exception e) {
@@ -37,12 +35,16 @@ public class LoginDAO {
 
     public Credentials validateLogin(String username, String password) {
 
-        String verifyLogin = "SELECT * FROM LoginCredentials WHERE EmployeeId = '"
-                + username + "' AND EmployeePass = sha2('" + password + "', 512)";
+        String verifyLogin = "SELECT * FROM LoginCredentials " +
+                "WHERE EmployeeId = ? AND EmployeePass = sha2(?, 512)";
+
 
         try {
-            Statement verifyStatement = connection.createStatement();
-            ResultSet queryResult = verifyStatement.executeQuery(verifyLogin);
+            PreparedStatement prepStmt = connection.prepareStatement(verifyLogin);
+
+            prepStmt.setInt(1, Integer.parseInt(username));
+            prepStmt.setString(2, password);
+            ResultSet queryResult = prepStmt.executeQuery();
 
             if (queryResult.next()) {
                 java.util.Date dt = new java.util.Date();
@@ -70,15 +72,24 @@ public class LoginDAO {
         return new Credentials("",false);
     }
     public boolean UpdateIsAdmin(int employeeId, int isAdmin) {
-        String lastLogin = "UPDATE LoginCredentials SET IsAdmin = " + isAdmin + " WHERE EmployeeId = " + employeeId;
+        String lastLogin = "UPDATE LoginCredentials SET IsAdmin = ? WHERE EmployeeId = ?";
         try {
-            Statement lastLoginStatement = connection.createStatement();
-            int lastLoginResult = lastLoginStatement.executeUpdate(lastLogin);
+            PreparedStatement prepStmt = connection.prepareStatement(lastLogin);
+            prepStmt.setBoolean(1, isAdmin == 1? true:false);
+            prepStmt.setInt(2, employeeId);
+            prepStmt.executeUpdate();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
             return false;
         }
+    }
+    public boolean getIsAdmin(int employeeId) throws SQLException {
+        String sql = "SELECT IsAdmin FROM LoginCredentials WHERE EmployeeId = ?";
+        PreparedStatement prepStmt = connection.prepareStatement(sql);
+        prepStmt.setInt(0, employeeId);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs.getBoolean("IsAdmin");
     }
 }

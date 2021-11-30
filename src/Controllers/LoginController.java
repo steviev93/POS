@@ -2,17 +2,15 @@ package Controllers;
 
 import DAO.LoginDAO;
 import Models.Credentials;
+import Utilities.SceneSwitchUtility;
 import Utilities.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -39,10 +37,9 @@ public class LoginController implements IController {
             loginLabel.setText(loginLabel.getText() + "Employee ID must be a number only \n");
             return;
         }
-        if (!Validator.validatePassword(password.getText())) {
-            loginLabel.setText(loginLabel.getText() + "Invalid password \n");
-            return;
-        }
+        Validator.validatePassword(password.getText(), loginLabel);
+
+
         LoginDAO loginDAO = null;
         try {
             loginDAO = new LoginDAO();
@@ -56,21 +53,8 @@ public class LoginController implements IController {
             TimeUnit.SECONDS.sleep(2);
             Stage currentStage = (Stage) loginButton.getScene().getWindow();
             currentStage.close();
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getClassLoader().getResource(
-                            "Views/MainWindow1.fxml"
-                    )
-            );
-
-
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(
-                    new Scene(loader.load())
-            );
-            MainWindowController mwc = loader.getController();
-            mwc.loadCredentials(result);
-            stage.setMaximized(true);
-            stage.show();
+            SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
+            sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/MainWindow1.fxml", loginButton), new MainWindowController(), result);
 
         }
         else loginLabel.setText("Login Failed");

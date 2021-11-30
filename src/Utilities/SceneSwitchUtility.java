@@ -32,6 +32,7 @@ public class SceneSwitchUtility {
         stage.setScene(
                 new Scene(loader.load())
         );
+        controller = loader.getController();
         controller.loadCredentials(c);
 
         if(newScenePath=="Views/MainWindow1.fxml") stage.setMaximized(true);

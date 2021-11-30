@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class EmployeeCreateController implements Initializable, IController {
     @FXML
@@ -43,6 +42,7 @@ public class EmployeeCreateController implements Initializable, IController {
     private Button CancelButton;
     @FXML
     private Label validationLabel;
+
     private LoginDAO loginDAO;
     private EmployeeDAO employeeDAO;
     private TitleDAO titleDAO;
@@ -75,35 +75,35 @@ public class EmployeeCreateController implements Initializable, IController {
     @FXML
     public void AddButtonOnAction() throws IOException, SQLException
     {
-        if (!Validator.validatePassword(Password.getText())) validationLabel.setText("Invalid Password");
-        String name = NameText.getText();
-        String phone = PhoneText.getText();
-        String email = EmailText.getText();
-        Date since = new java.util.Date();
-        float salary = 0.0f;
-        try {
-            salary = Float.parseFloat(SalaryText.getText());
-        } catch (Exception e) {
-            validationLabel.setText("Salary must be a float, numbers only");
-            return;
-        }
-
-        String password = Password.getText();
-
-        Integer titleId = Integer.parseInt(TitleCBox.getValue().toString().substring(0,1));
-        Integer isAdmin = Integer.parseInt(isAdminCBox.getValue().toString().substring(0,1));
-
-        Employee newEmployee = new Employee(-1, name,phone,email,since,salary,titleId);
-        boolean result = employeeDAO.Create(newEmployee);
-        Integer userNo = employeeDAO.ReadLast();
-        System.out.println(userNo);
-        boolean passResult = loginDAO.Create(String.valueOf(userNo),password,isAdmin);
+        if (validationLabel.getText() == "") {
+            String name = NameText.getText();
+            String phone = PhoneText.getText();
+            String email = EmailText.getText();
+            Date since = new java.util.Date();
+            float salary = Float.parseFloat(SalaryText.getText());
 
 
-        if (result && userNo != -1) {
-            Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-            currentStage.close();
+            String password = Password.getText();
 
+            Integer titleId = Integer.parseInt(TitleCBox.getValue().toString().substring(0, 1));
+            Integer isAdmin = Integer.parseInt(isAdminCBox.getValue().toString().substring(0, 1));
+            Employee newEmployee;
+            try {
+                newEmployee  = new Employee(-1, name, phone, email, since, salary, titleId);
+                boolean result = employeeDAO.Create(newEmployee);
+                Integer userNo = employeeDAO.ReadLast();
+                System.out.println(userNo);
+                boolean passResult = loginDAO.Create(String.valueOf(userNo), password, isAdmin);
+
+
+                if (result && userNo != -1) {
+                    Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+                    currentStage.close();
+
+                }
+            } catch (IllegalArgumentException e) {
+                validationLabel.setText(e.getMessage());
+            }
         }
     }
 
@@ -115,14 +115,29 @@ public class EmployeeCreateController implements Initializable, IController {
     @FXML
     public void phoneChanged() {
 
-        if (Pattern.compile("[\\D]").matcher(PhoneText.getText()).find()) {
-            validationLabel.setText("Phone number should be numbers only");
-            PhoneText.setText(Pattern.compile("[\\D]").matcher(PhoneText.getText()).replaceAll(""));
-        } else validationLabel.setText("");
-        if (PhoneText.getText().length() >= 11) {
-            PhoneText.setText(PhoneText.getText().substring(1));
-        }
+        Validator.validatePhone(PhoneText, validationLabel);
         PhoneText.positionCaret(PhoneText.getText().length());
+
+    }
+    @FXML
+    public void emailChanged() {
+
+        Validator.validateEmail(EmailText, validationLabel);
+        EmailText.positionCaret(EmailText.getText().length());
+
+    }
+    @FXML
+    public void salaryChanged() {
+
+        Validator.validateSalary(SalaryText, validationLabel);
+        SalaryText.positionCaret(SalaryText.getText().length());
+
+    }
+    @FXML
+    public void passwordChanged() {
+
+        Validator.validatePassword(Password.getText(), validationLabel);
+        SalaryText.positionCaret(SalaryText.getText().length());
 
     }
 

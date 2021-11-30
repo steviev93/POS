@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class Employee {
     private int EmployeeId;
@@ -20,6 +21,13 @@ public class Employee {
         EmployedSince = employedSince;
         HourlySalary = hourlySalary;
         TitleId = titleId;
+        if (employeeName == null
+                || employeeName == ""
+                || Pattern.compile("\\d").matcher(employeeName).find())  throw new IllegalArgumentException("Invalid Name");
+        if (phoneNumber == null || phoneNumber == "")
+            throw new IllegalArgumentException("Invalid Number");
+        if (employedSince == null) throw new IllegalArgumentException("Invalid Date");
+        if (hourlySalary < 7.25f) throw new IllegalArgumentException("PAY YOUR EMPLOYEES MORE");
     }
 
     public int getEmployeeId() {
