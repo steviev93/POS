@@ -37,16 +37,24 @@ public class ProductUpdateController implements IController {
     @FXML
     public void UpdateProductButtonOnAction() throws IOException, SQLException
     {
-        productDAO = new ProductDAO();
-        newProduct.setName(ProductNameText.getText());
-        newProduct.setPrice(Double.parseDouble(ProductPriceText.getText()));
-        boolean result = productDAO.Update(newProduct);
+        if (ProductNameText.getText().length() > 3) {
+            try {
+                double price = Double.parseDouble(ProductPriceText.getText());
+                productDAO = new ProductDAO();
+                newProduct.setName(ProductNameText.getText());
+                newProduct.setPrice(price);
+                boolean result = productDAO.Update(newProduct);
 
-        if (result) {
-            Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-            currentStage.close();
+                if (result) {
+                    Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+                    currentStage.close();
 
+                }
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
         }
+
     }
 
     @FXML

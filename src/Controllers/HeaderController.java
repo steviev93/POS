@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,8 @@ public class HeaderController implements Initializable, IController {
     @FXML
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
         credentials = null;
+        Stage currentStage = (Stage) logoutButton.getScene().getWindow();
+        currentStage.close();
         SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
         sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/LoginView.fxml", logoutButton), new LoginController(), null);
 
@@ -84,6 +87,7 @@ public class HeaderController implements Initializable, IController {
     }
     @FXML
     public void ClockButtonOnAction(ActionEvent event) throws IOException {
+
         SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
         sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/ClockView.fxml", logoutButton), new ClockController(), credentials);
 

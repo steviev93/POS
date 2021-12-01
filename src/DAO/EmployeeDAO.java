@@ -4,10 +4,7 @@ import Models.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class EmployeeDAO {
     private Connection connection;
@@ -18,17 +15,18 @@ public class EmployeeDAO {
     }
     public boolean Create(Employee employee) throws SQLException {
 
-        String createStatement = "INSERT INTO Employees(EmployeeName,PhoneNumber,Email,EmployedSince,HourlySalary,TitleId) VALUES ('" +
-                employee.getEmployeeName() + "', '" +
-                employee.getPhoneNumber() + "', '" +
-                employee.getEmail() + "', NOW(), " +
-                employee.getHourlySalary() + ", " +
-                employee.getTitleId() +
-                ")";
+        String createStatement = "INSERT INTO Employees(EmployeeName,PhoneNumber,Email,EmployedSince,HourlySalary,TitleId)" +
+                " VALUES (?, ?, ?, ?, ?)";
 
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(createStatement);
+            PreparedStatement prepStmt = connection.prepareStatement(createStatement);
+            prepStmt.setString(1, employee.getEmployeeName());
+            prepStmt.setString(2, employee.getPhoneNumber());
+            prepStmt.setString(3, employee.getEmail());
+            prepStmt.setFloat(4, employee.getHourlySalary());
+            prepStmt.setInt(5, employee.getTitleId());
+
+            prepStmt.executeUpdate();
 
             return true;
 
@@ -84,26 +82,31 @@ public class EmployeeDAO {
         }
     }
     public boolean Update(Employee employee) {
-        String updateStatement = "UPDATE Employees SET PhoneNumber = '" +
-                employee.getPhoneNumber() + "', Email = '" +
-                employee.getEmail() + "', HourlySalary = " +
-                employee.getHourlySalary() + ", TitleId = " +
-                employee.getTitleId() + " WHERE EmployeeId = " + employee.getEmployeeId();
+        String updateStatement = "UPDATE Employees SET PhoneNumber = ?, Email = ?," +
+                " HourlySalary = ?, TitleId = ? WHERE EmployeeId = ?";
         try {
-            Statement statement = connection.createStatement();
-            int result = statement.executeUpdate(updateStatement);
+            PreparedStatement prepStmt = connection.prepareStatement(updateStatement);
+            prepStmt.setString(1, employee.getPhoneNumber());
+            prepStmt.setString(2, employee.getEmail());
+            prepStmt.setFloat(3, employee.getHourlySalary());
+            prepStmt.setInt(4, employee.getTitleId());
+            prepStmt.setInt(5, employee.getEmployeeId());
+
+            prepStmt.executeUpdate();
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
-            return false;
         }
 
-        return true;
+        return false;
     }
     public boolean Delete(Employee employee) throws SQLException {
-        String deleteStatement = "DELETE FROM Employees WHERE EmployeeId = " + employee.getEmployeeId();
+        String deleteStatement = "DELETE FROM Employees WHERE EmployeeId = ?";
         try {
+            PreparedStatement prepStmt = connection.prepareStatement(deleteStatement);
+            prepStmt.execute();
             Statement statement = connection.createStatement();
             int result = statement.executeUpdate(deleteStatement);
             if (result == 1) return true;

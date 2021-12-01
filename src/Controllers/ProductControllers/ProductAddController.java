@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class ProductController implements Initializable, IController {
+public class ProductAddController implements Initializable, IController {
     @FXML
     private TextField ProductNameText;
     @FXML
@@ -49,23 +49,27 @@ public class ProductController implements Initializable, IController {
             e.printStackTrace();
             e.getErrorCode();
         }
-
-
     }
 
     @FXML
     public void AddProductButtonOnAction() throws IOException, SQLException
     {
         String name = ProductNameText.getText();
-        Double price = Double.parseDouble(ProductPriceText.getText());
-        Integer catId = Integer.parseInt(CatIdChoiceBox.getValue().toString().substring(0,1));
-        Product newProduct = new Product(-1, name,price,catId);
-        boolean result = productDAO.Create(newProduct);
+        Double price = 0.0d;
+        try {
+            Double.parseDouble(ProductPriceText.getText());
+            Integer catId = Integer.parseInt(CatIdChoiceBox.getValue().toString().substring(0,1));
+            Product newProduct = new Product(-1, name,price,catId);
+            boolean result = productDAO.Create(newProduct);
 
-        if (result) {
-            Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-            currentStage.close();
+            if (result) {
+                Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+                currentStage.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
         }
+
     }
 
     @FXML

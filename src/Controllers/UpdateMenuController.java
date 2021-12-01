@@ -2,7 +2,7 @@ package Controllers;
 
 import Controllers.CategoryControllers.CategoryController;
 import Controllers.CategoryControllers.CategoryDeleteController;
-import Controllers.ProductControllers.ProductController;
+import Controllers.ProductControllers.ProductAddController;
 import Controllers.ProductControllers.ProductDeleteController;
 import Controllers.ProductControllers.ProductUpdateController;
 import DAO.CategoryDAO;
@@ -89,54 +89,62 @@ public class UpdateMenuController implements Initializable, IController {
     @FXML
     public void AddProductButtonOnAction() throws IOException{
         SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/ProductViews/ProductViewCreate.fxml", backButton), new ProductController(), credentials);
+        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/ProductViews/ProductViewCreate.fxml", backButton), new ProductAddController(), credentials);
 
     }
     @FXML
     public void UpdateProductButtonOnAction() throws IOException{
-        Stage currentStage = (Stage) backButton.getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getClassLoader().getResource(
-                        "Views/Admin/ProductViews/ProductViewUpdate.fxml"
-                )
-        );
-
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(
-                new Scene((Parent)loader.load())
-        );
-
-        ProductUpdateController controller = loader.getController();
         Product updateProduct = (Product)ProductTable.getSelectionModel().getSelectedItem();
-        controller.setNewProduct(updateProduct);
+        if (updateProduct != null) {
 
-        stage.show();
+            Stage currentStage = (Stage) backButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getClassLoader().getResource(
+                            "Views/Admin/ProductViews/ProductViewUpdate.fxml"
+                    )
+            );
+
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(
+                    new Scene((Parent) loader.load())
+            );
+
+            ProductUpdateController controller = loader.getController();
+
+            controller.setNewProduct(updateProduct);
+
+            stage.show();
+        }
     }
     @FXML
     public void DeleteProductButtonOnAction() throws IOException{
-        Stage currentStage = (Stage) backButton.getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getClassLoader().getResource(
-                        "Views/Admin/ProductViews/ProductViewDelete.fxml"
-                )
-        );
+        if (ProductTable.getSelectionModel().getSelectedItems().get(0) != null) {
 
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(
-                new Scene((Parent)loader.load())
-        );
 
-        ProductDeleteController controller = loader.getController();
-        controller.setProducts(ProductTable.getSelectionModel().getSelectedItems());
-        ObservableList<String> deleteProducts = FXCollections.observableArrayList();
-        for (Product p : (ObservableList<Product>) ProductTable.getSelectionModel().getSelectedItems()) {
-            deleteProducts.add(p.getName());
+            Stage currentStage = (Stage) backButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getClassLoader().getResource(
+                            "Views/Admin/ProductViews/ProductViewDelete.fxml"
+                    )
+            );
+
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(
+                    new Scene((Parent) loader.load())
+            );
+
+            ProductDeleteController controller = loader.getController();
+            controller.setProducts(ProductTable.getSelectionModel().getSelectedItems());
+            ObservableList<String> deleteProducts = FXCollections.observableArrayList();
+            for (Product p : (ObservableList<Product>) ProductTable.getSelectionModel().getSelectedItems()) {
+                deleteProducts.add(p.getName());
+            }
+            controller.setDeleteList(deleteProducts);
+
+            stage.show();
         }
-        controller.setDeleteList(deleteProducts);
-
-        stage.show();
     }
     @FXML
     public void AddCategoryButtonOnAction() throws IOException{
@@ -146,26 +154,28 @@ public class UpdateMenuController implements Initializable, IController {
     }
     @FXML
     public void DeleteCategoryButtonOnAction() throws IOException{
-        Stage currentStage = (Stage) backButton.getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getClassLoader().getResource(
-                        "Views/Admin/CategoryViews/CategoryViewDelete.fxml"
-                )
-        );
-
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(
-                new Scene((Parent)loader.load())
-        );
-
-        CategoryDeleteController controller = loader.getController();
         Category catDelete = (Category) CategoryTable.getSelectionModel().getSelectedItem();
+        if (catDelete != null) {
+            Stage currentStage = (Stage) backButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getClassLoader().getResource(
+                            "Views/Admin/CategoryViews/CategoryViewDelete.fxml"
+                    )
+            );
 
-        controller.setCategory(catDelete);
-        controller.setCategoryLabel(catDelete.getCategoryName());
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(
+                    new Scene((Parent) loader.load())
+            );
 
-        stage.show();
+            CategoryDeleteController controller = loader.getController();
+
+            controller.setCategory(catDelete);
+            controller.setCategoryLabel(catDelete.getCategoryName());
+
+            stage.show();
+        }
     }
 
 

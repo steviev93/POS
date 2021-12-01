@@ -39,25 +39,6 @@ public class ClockController implements Initializable, IController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        try {
-            loginDAO = new LoginDAO();
-            clockDAO = new ClockDAO();
-            lastClock = clockDAO.lastClock(credentials.getEmployeeId());
-            if (lastClock.getLastClock() != null) {
-                if (lastClock.wasClockin() == true) {
-                    ClockMessage.setText("Last Clock-In:");
-                    LastClockTime.setText(lastClock.getLastClock().toString());
-                    ClockButton.setText("Clock-Out");
-                } else {
-                    ClockMessage.setText("Last Clock-Out:");
-                    LastClockTime.setText(lastClock.getLastClock().toString());
-                    ClockButton.setText("Clock-In");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -82,6 +63,24 @@ public class ClockController implements Initializable, IController {
     @Override
     public void loadCredentials(Credentials c) {
 
-        credentials = c;
+        this.credentials = c;
+        try {
+            loginDAO = new LoginDAO();
+            clockDAO = new ClockDAO();
+            lastClock = clockDAO.lastClock(credentials.getEmployeeId());
+            if (lastClock.getLastClock() != null) {
+                if (lastClock.wasClockin() == true) {
+                    ClockMessage.setText("Last Clock-In:");
+                    LastClockTime.setText(lastClock.getLastClock().toString());
+                    ClockButton.setText("Clock-Out");
+                } else {
+                    ClockMessage.setText("Last Clock-Out:");
+                    LastClockTime.setText(lastClock.getLastClock().toString());
+                    ClockButton.setText("Clock-In");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
