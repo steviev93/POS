@@ -8,7 +8,7 @@ public class DBConnector {
     private Connection dbLink;
     private String dbName = "SteviesFoodShack";
     private String dbUser = "root";
-    private String dbPassword = "ii314B,epc00";
+    private String dbPassword = "";
 
     protected Connection getConnection() throws SQLException {
 
