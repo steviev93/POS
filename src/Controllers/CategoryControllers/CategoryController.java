@@ -48,9 +48,15 @@ public class CategoryController implements IController {
     @FXML
     public void CancelButtonOnAction() throws IOException
     {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", CancelButton), new UpdateMenuController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/UpdateMenuView.fxml",
+                        CancelButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        null,
+                        null
+                );
     }
 
     @Override

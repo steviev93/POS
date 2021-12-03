@@ -4,6 +4,8 @@ import Controllers.IController;
 import DAO.ProductDAO;
 import Models.Credentials;
 import Models.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +24,11 @@ public class ProductUpdateController implements IController {
     private Label CatId;
     @FXML
     private Button CancelButton;
+    @FXML
+    private Label validationLabelName;
+    @FXML
+    private Label validationLabelPrice;
+    private ObservableList<Label> validators = FXCollections.observableArrayList();
     private Product newProduct;
     private ProductDAO productDAO;
     private Credentials credentials;
@@ -32,6 +39,8 @@ public class ProductUpdateController implements IController {
         ProductNameText.setText(p.getName());
         ProductPriceText.setText(String.valueOf(p.getPrice()));
         CatId.setText(String.valueOf(p.getCategoryId()));
+        validators.add(validationLabelName);
+        validators.add(validationLabelPrice);
     }
 
     @FXML

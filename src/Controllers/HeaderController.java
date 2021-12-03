@@ -46,8 +46,6 @@ public class HeaderController implements Initializable, IController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @FXML
@@ -55,54 +53,105 @@ public class HeaderController implements Initializable, IController {
         credentials = null;
         Stage currentStage = (Stage) logoutButton.getScene().getWindow();
         currentStage.close();
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/LoginView.fxml", logoutButton), new LoginController(), null);
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/LoginView.fxml",
+                        logoutButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        null,
+                        null
+                );
 
     }
     @FXML
     public void UpdateMenuButtonOnAction(ActionEvent event) throws IOException {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", logoutButton), new UpdateMenuController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                "Views/Admin/UpdateMenuView.fxml",
+                        logoutButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+        );
     }
     @FXML
     public void EmployeeInfoButtonOnAction(ActionEvent event) throws IOException {
 
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/EmployeeViews/EmployeeInfoView.fxml", logoutButton), new EmployeeInfoController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                "Views/Admin/EmployeeViews/EmployeeInfoView.fxml",
+                        logoutButton,
+                        new EmployeeInfoController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+        );
     }
     @FXML
     public void InventoryMgmtButtonOnAction(ActionEvent event) throws IOException {
 
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/InventoryMgmtView.fxml", logoutButton), new InventoryMgmtController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                "Views/Admin/InventoryMgmtView.fxml",
+                        logoutButton,
+                        new InventoryMgmtController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+        );
     }
     @FXML
     public void SalesButtonOnAction(ActionEvent event) throws IOException {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/SalesView.fxml", logoutButton), new SalesController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/SalesView.fxml",
+                        logoutButton,
+                        new SalesController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+                );
     }
     @FXML
     public void ClockButtonOnAction(ActionEvent event) throws IOException {
 
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/ClockView.fxml", logoutButton), new ClockController(), credentials);
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/ClockView.fxml",
+                        logoutButton,
+                        new ClockController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+                );
     }
     @FXML
     public void ScheduleButtonOnAction(ActionEvent event) throws IOException {
 
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/ClockView.fxml", logoutButton), new ClockController(), credentials);
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                "Views/ClockView.fxml",
+                        logoutButton,
+                        new ClockController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+        );
     }
     @FXML
     public void HistoryButtonOnAction(ActionEvent event) throws IOException {
 
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/ClockView.fxml", logoutButton), new ClockController(), credentials);
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                "Views/ClockView.fxml",
+                        logoutButton,
+                        new ClockController(),
+                        credentials,
+                        "Views/MainWindow1.fxml",
+                        new MainWindowController()
+        );
     }
 
     @Override

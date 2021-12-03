@@ -18,14 +18,11 @@ public class Validator {
 
     public static void validatePassword(String pass, Label validationLabel) {
         if (Pattern.compile("\\w{5,12}").matcher(pass).matches())
-            validationLabel.setText(
-                    validationLabel.getText().replaceAll("(\nInvalid Password)|(Invalid Password)", "")
-            );
+            validationLabel.setText("");
         else
-            validationLabel.setText(
-                    validationLabel.getText() == ""? "Invalid Password" : validationLabel.getText() + "\nInvalid Password");
-
+            validationLabel.setText("Invalid Password");
     }
+
     public static void validateSalary(TextField SalaryText, Label validationLabel) {
         boolean validated;
         try {
@@ -35,34 +32,29 @@ public class Validator {
             validated = false;
             SalaryText.clear();
         }
-        if (validated) validationLabel.setText(validationLabel.getText().replaceAll("(\nSalary should be numbers only)|(Salary should be numbers only)", ""));
-        else validationLabel.setText(
-                validationLabel.getText() == ""? "Salary should be numbers only" : validationLabel.getText() + "\nSalary should be numbers only");
+        if (validated) validationLabel.setText("");
+        else validationLabel.setText("Salary should be numbers only");
     }
-    public static void validatePhone(TextField PhoneText, Label validationLabel) {
 
-        if (Pattern.compile("[\\D]").matcher(PhoneText.getText()).find()) {
-            validationLabel.setText(
-                    validationLabel.getText() == ""? "Phone number should be numbers only" : validationLabel.getText() + "\nPhone number should be numbers only");
-            PhoneText.setText(Pattern.compile("[\\D]").matcher(PhoneText.getText()).replaceAll(""));
-        } else validationLabel.setText(validationLabel.getText().replaceAll("(\nPhone number should be numbers only)|(Phone number should be numbers only)", ""));
+    public static void validatePhone(TextField PhoneText, Label validationLabel) {
         if (PhoneText.getText().length() >= 11) {
             PhoneText.setText(PhoneText.getText().substring(1));
         }
+        if (Pattern.compile("[\\D]").matcher(PhoneText.getText()).find() || PhoneText.getText().length() != 10) {
+            if (validationLabel.getText() != "Numbers Only, 11 digits")
+                validationLabel.setText("Numbers Only, 11 digits");
+            PhoneText.setText(PhoneText.getText().replaceAll("[\\D]", ""));
+        } else validationLabel.setText("");
 
     }
+
     public static void validateEmail(TextField EmailText, Label validationLabel) {
-        if (!Pattern.compile("[\\S^@]+@[\\S^@]+.[com|net|org]$").matcher(EmailText.getText()).matches()) {
+        if (!Pattern.compile("[\\S]+@[\\S]+.[\\S]$").matcher(EmailText.getText()).matches()) {
             if (!validationLabel.getText().contains("Invalid Email")) {
-                validationLabel.setText(
-                        validationLabel.getText() == ""
-                                ? "Invalid Email" : validationLabel.getText() + "\nInvalid Email");
+                validationLabel.setText("Invalid Email");
             }
         }
-
-        else validationLabel.setText(validationLabel.getText().replaceAll("\nInvalidEmail|Invalid Email", ""));
-        System.out.println(validationLabel.getText());
-
+        else validationLabel.setText("");
     }
 
 }

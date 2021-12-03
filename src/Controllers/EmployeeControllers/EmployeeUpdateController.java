@@ -40,7 +40,14 @@ public class EmployeeUpdateController implements Initializable, IController {
     @FXML
     private Button CancelButton;
     @FXML
-    private Label validationLabel;
+    private Label validationLabelName;
+    @FXML
+    private Label validationLabelPhone;
+    @FXML
+    private Label validationLabelEmail;
+    @FXML
+    private Label validationLabelSalary;
+    private ObservableList<Label> validators = FXCollections.observableArrayList();
     private LoginDAO loginDAO;
     private EmployeeDAO employeeDAO;
     private TitleDAO titleDAO;
@@ -65,6 +72,11 @@ public class EmployeeUpdateController implements Initializable, IController {
             e.printStackTrace();
             e.getErrorCode();
         }
+        validators.add(validationLabelName);
+        validators.add(validationLabelPhone);
+        validators.add(validationLabelSalary);
+        validators.add(validationLabelEmail);
+
     }
     public void setUpdateEmployee(Employee emp) {
         employee = emp;
@@ -77,7 +89,6 @@ public class EmployeeUpdateController implements Initializable, IController {
         PhoneText.setText(Pattern.compile("[\\D]").matcher(employee.getPhoneNumber()).replaceAll(""));
         EmailText.setText(employee.getEmail());
         SalaryText.setText(String.valueOf(employee.getHourlySalary()));
-        System.out.println(titleList.get(employee.getTitleId()).getTitleName());
         TitleCBox.setValue(TitleCBox.getItems().get(employee.getTitleId()-1));
         isAdminCBox.setValue(isAdminCBox.getItems().get(isAdmin));
 
@@ -86,7 +97,14 @@ public class EmployeeUpdateController implements Initializable, IController {
     @FXML
     public void UpdateButtonOnAction() throws IOException, SQLException
     {
-        if (validationLabel.getText() == "") {
+        boolean verified = true;
+        for (Label v : validators) {
+            if (v.getText() != "") {
+                verified = false;
+                break;
+            };
+        }
+        if (verified) {
             String name = NameText.getText();
             String phone = PhoneText.getText();
             String email = EmailText.getText();
@@ -114,31 +132,38 @@ public class EmployeeUpdateController implements Initializable, IController {
     @FXML
     public void phoneChanged() {
 
-        Validator.validatePhone(PhoneText, validationLabel);
+        Validator.validatePhone(PhoneText, validationLabelPhone);
         PhoneText.positionCaret(PhoneText.getText().length());
+        validators.set(1, validationLabelPhone);
 
     }
     @FXML
     public void emailChanged() {
 
-        Validator.validateEmail(EmailText, validationLabel);
+        Validator.validateEmail(EmailText, validationLabelEmail);
         EmailText.positionCaret(EmailText.getText().length());
+        validators.set(3, validationLabelEmail);
+
 
     }
     @FXML
     public void salaryChanged() {
 
-        Validator.validateSalary(SalaryText, validationLabel);
+        Validator.validateSalary(SalaryText, validationLabelSalary);
         SalaryText.positionCaret(SalaryText.getText().length());
+        validators.set(2, validationLabelSalary);
+
 
     }
     @FXML
-    public void passwordChanged() {
+    public void nameChanged() {
 
-        Validator.validatePassword(Password.getText(), validationLabel);
-        SalaryText.positionCaret(SalaryText.getText().length());
+//        Validator.validateSalary(SalaryText, validationLabelSalary);
+//        SalaryText.positionCaret(SalaryText.getText().length());
+//        validators.set(0, validationLabelName);
 
     }
+
 
     @Override
     public void loadCredentials(Credentials c) {

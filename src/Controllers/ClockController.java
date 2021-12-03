@@ -4,6 +4,7 @@ import DAO.ClockDAO;
 import DAO.LoginDAO;
 import Models.Clock;
 import Models.Credentials;
+import Utilities.SceneSwitchUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -57,8 +58,15 @@ public class ClockController implements Initializable, IController {
     }
     @FXML
     public void CancelButtonOnAction() throws IOException {
-        Stage currentStage = (Stage) ClockButton.getScene().getWindow();
-        currentStage.close();
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/MainWindow1.fxml",
+                        CancelButton,
+                        new MainWindowController(),
+                        credentials,
+                        null,
+                        null
+                );
     }
     @Override
     public void loadCredentials(Credentials c) {

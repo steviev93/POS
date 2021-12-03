@@ -5,10 +5,7 @@ import Models.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ProductDAO {
 
@@ -22,12 +19,14 @@ public class ProductDAO {
 
     public boolean Create(Product product) throws SQLException {
 
-        String createStatement = "INSERT INTO Items(Name,Price,categoryId) VALUES ('" +
-            product.getName() + "', '" +
-            product.getPrice() + "', '" +
-            product.getCategoryId() + "')";
+        String createStatement = "INSERT INTO Items(Name,Price,categoryId) VALUES (?, ?, ?)";
 
         try {
+            PreparedStatement prepStmt = connection.prepareStatement(createStatement);
+            prepStmt.setString(1, product.getName());
+            prepStmt.setFloat(2, (float)product.getPrice());
+            prepStmt.setInt(3, product.getId());
+            prepStmt.executeUpdate();
             Statement statement = connection.createStatement();
             statement.executeUpdate(createStatement);
 
@@ -65,11 +64,13 @@ public class ProductDAO {
     }
 
     public boolean Update(Product product) {
-            String updateStatement = "UPDATE Items SET Name = " +
-                    product.getName() + ", Price = " + product.getPrice() + " WHERE idItems = " + product.getId();
+            String updateStatement = "UPDATE Items SET Name = ?, Price = ? WHERE idItems = ?";
             try {
-                Statement statement = connection.createStatement();
-                int result = statement.executeUpdate(updateStatement);
+                PreparedStatement prepStmt = connection.prepareStatement(updateStatement);
+                prepStmt.setString(1, product.getName());
+                prepStmt.setFloat(2, (float)product.getPrice());
+                prepStmt.setInt(3, product.getId());
+                prepStmt.executeUpdate();
 
             } catch (Exception e) {
                 e.printStackTrace();

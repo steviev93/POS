@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,16 +43,23 @@ public class ProductDeleteController implements IController {
     public void DeleteButtonOnAction(ActionEvent event) throws SQLException, IOException {
         ProductDAO productDAO = new ProductDAO();
         productDAO.Delete(Products);
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", CancelButton), new UpdateMenuController(), credentials);
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/UpdateMenuView.fxml",
+                        CancelButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        null,
+                        null
+                );
 
 
     }
     @FXML
     public void CancelButtonOnAction() throws IOException
     {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", CancelButton), new UpdateMenuController(), credentials);
+        Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+        currentStage.close();
 
     }
 

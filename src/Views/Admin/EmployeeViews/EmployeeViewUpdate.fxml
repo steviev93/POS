@@ -33,9 +33,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="268.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
@@ -44,12 +46,12 @@
                         <Insets left="100.0" />
                     </GridPane.margin>
                 </Label>
-                <Label layoutX="130.0" layoutY="21.0" text="Phone Number:" GridPane.rowIndex="1">
+                <Label layoutX="130.0" layoutY="21.0" text="Phone Number:" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="50.0" />
                     </GridPane.margin>
                 </Label>
-                <Label layoutX="10.0" layoutY="46.0" text="Email:" GridPane.rowIndex="2">
+                <Label layoutX="10.0" layoutY="46.0" text="Email:" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="100.0" />
                     </GridPane.margin>
@@ -59,17 +61,17 @@
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="PhoneText" layoutX="226.0" layoutY="14.0" onKeyTyped="#phoneChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="PhoneText" layoutX="226.0" layoutY="14.0" onKeyTyped="#phoneChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <ChoiceBox fx:id="TitleCBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ChoiceBox fx:id="TitleCBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </ChoiceBox>
-                <TextField fx:id="EmailText" layoutX="167.0" layoutY="114.0" onKeyTyped="#emailChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <TextField fx:id="EmailText" layoutX="167.0" layoutY="114.0" onKeyTyped="#emailChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
@@ -79,7 +81,7 @@
                         <Insets left="45.0" />
                     </GridPane.margin>
                 </Label>
-                <Label layoutX="363.0" layoutY="119.0" text="Title Id:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label layoutX="363.0" layoutY="119.0" text="Title Id:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="80.0" />
                     </GridPane.margin>
@@ -89,21 +91,24 @@
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <Label layoutX="471.0" layoutY="90.0" text="Is Admin:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Label layoutX="471.0" layoutY="90.0" text="Is Admin:" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="70.0" />
                     </GridPane.margin>
                 </Label>
-                <ChoiceBox fx:id="isAdminCBox" layoutX="532.0" layoutY="85.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                <ChoiceBox fx:id="isAdminCBox" layoutX="532.0" layoutY="85.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </ChoiceBox>
-            <Label id="validationLabel" alignment="CENTER" prefHeight="17.0" prefWidth="0.0" textFill="#e90101" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Label id="validationLabelEmail" fx:id="validationLabelEmail" alignment="CENTER" onKeyTyped="#emailChanged" prefHeight="17.0" prefWidth="246.0" textFill="#e90101" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
+            <Label id="validationLabelPhone" fx:id="validationLabelPhone" onKeyTyped="#phoneChanged" prefHeight="17.0" prefWidth="243.0" textFill="#fa0303" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label id="validationLabelName" fx:id="validationLabelName" onKeyTyped="#nameChanged" prefHeight="17.0" prefWidth="298.0" textFill="#f30202" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label id="validationLabelSalary" fx:id="validationLabelSalary" onKeyTyped="#salaryChanged" prefHeight="17.0" prefWidth="255.0" textFill="#f00202" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </center>

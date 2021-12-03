@@ -1,6 +1,8 @@
 package Controllers.EmployeeControllers;
 
 import Controllers.IController;
+import Controllers.MainWindowController;
+import Controllers.UpdateMenuController;
 import DAO.EmployeeDAO;
 import Models.Credentials;
 import Models.Employee;
@@ -72,8 +74,14 @@ public class EmployeeInfoController implements Initializable, IController {
     }
     @FXML
     public void AddButtonOnAction(ActionEvent event) throws IOException {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/EmployeeViews/EmployeeViewCreate.fxml", AddButton), new EmployeeCreateController(), credentials);
+        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility(
+                "Views/Admin/EmployeeViews/EmployeeViewCreate.fxml",
+                AddButton,
+                new EmployeeCreateController(),
+                credentials,
+                "Views/Admin/EmployeeViews/EmployeeInfoView.fxml",
+                new EmployeeInfoController()
+        );
 
 
     }
@@ -81,8 +89,6 @@ public class EmployeeInfoController implements Initializable, IController {
     public void UpdateButtonOnAction(ActionEvent event) throws IOException {
         Employee updateEmployee = (Employee)EmployeeTable.getSelectionModel().getSelectedItem();
         if (!(updateEmployee == null)) {
-            Stage currentStage = (Stage) AddButton.getScene().getWindow();
-            currentStage.close();
             FXMLLoader loader = new FXMLLoader(
                     getClass().getClassLoader().getResource(
                             "Views/Admin/EmployeeViews/EmployeeViewUpdate.fxml"
@@ -98,15 +104,25 @@ public class EmployeeInfoController implements Initializable, IController {
 
             controller.setUpdateEmployee(updateEmployee);
 
-            stage.show();
+            stage.showAndWait();
+            Stage currentStage = (Stage) AddButton.getScene().getWindow();
+            currentStage.close();
+            SceneSwitchUtility sceneSwitch =
+                    new SceneSwitchUtility(
+                            "Views/Admin/EmployeeViews/EmployeeInfoView.fxml",
+                            AddButton,
+                            new UpdateMenuController(),
+                            credentials,
+                            null,
+                            null
+                    );
         }
     }
     @FXML
     public void DeleteButtonOnAction(ActionEvent event) throws IOException {
         Employee empDelete = (Employee) EmployeeTable.getSelectionModel().getSelectedItem();
         if (!(empDelete == null)) {
-            Stage currentStage = (Stage) AddButton.getScene().getWindow();
-            currentStage.close();
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getClassLoader().getResource(
                             "Views/Admin/EmployeeViews/EmployeeViewDelete.fxml"
@@ -122,14 +138,32 @@ public class EmployeeInfoController implements Initializable, IController {
             controller.setEmployee(empDelete);
             controller.setEmployeeLabel(empDelete.getEmployeeName());
 
-            stage.show();
+            stage.showAndWait();
+            Stage currentStage = (Stage) AddButton.getScene().getWindow();
+            currentStage.close();
+            SceneSwitchUtility sceneSwitch =
+                    new SceneSwitchUtility(
+                            "Views/Admin/EmployeeViews/EmployeeInfoView.fxml",
+                            AddButton,
+                            new UpdateMenuController(),
+                            credentials,
+                            null,
+                            null
+                    );
         }
 
     }
     @FXML
     public void CancelButtonOnAction() throws IOException {
-        Stage currentStage = (Stage) AddButton.getScene().getWindow();
-        currentStage.close();
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/MainWindow1.fxml",
+                        AddButton,
+                        new MainWindowController(),
+                        credentials,
+                        null,
+                        null
+                );
 
     }
 

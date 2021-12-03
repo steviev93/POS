@@ -34,10 +34,13 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="268.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="42.0" minHeight="6.0" prefHeight="29.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
@@ -46,12 +49,12 @@
                         <Insets left="100.0" />
                     </GridPane.margin>
                 </Label>
-                <Label layoutX="130.0" layoutY="21.0" text="Phone Number:" GridPane.rowIndex="1">
+                <Label layoutX="130.0" layoutY="21.0" text="Phone Number:" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="50.0" />
                     </GridPane.margin>
                 </Label>
-                <Label layoutX="10.0" layoutY="46.0" text="Email:" GridPane.rowIndex="2">
+                <Label layoutX="10.0" layoutY="46.0" text="Email:" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="100.0" />
                     </GridPane.margin>
@@ -61,17 +64,17 @@
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="PhoneText" layoutX="226.0" layoutY="14.0" onKeyTyped="#phoneChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="PhoneText" layoutX="226.0" layoutY="14.0" onKeyTyped="#phoneChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <ChoiceBox fx:id="TitleCBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ChoiceBox fx:id="TitleCBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </ChoiceBox>
-            <TextField fx:id="EmailText" layoutX="167.0" layoutY="114.0" onKeyTyped="#emailChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="EmailText" layoutX="167.0" layoutY="114.0" onKeyTyped="#emailChanged" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
@@ -81,7 +84,7 @@
                   <Insets left="45.0" />
                </GridPane.margin>
             </Label>
-            <Label layoutX="363.0" layoutY="119.0" text="Title Id:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label layoutX="363.0" layoutY="119.0" text="Title Id:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
@@ -91,27 +94,51 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label layoutX="110.0" layoutY="148.0" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label layoutX="110.0" layoutY="148.0" prefHeight="17.0" prefWidth="67.0" text="Password:" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets left="170.0" />
+                  <Insets />
                </GridPane.margin>
             </Label>
-            <PasswordField fx:id="Password" onKeyTyped="#passwordChanged" prefWidth="100.0" promptText="Upper and lower case, 5-12 characters" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <PasswordField fx:id="Password" onKeyTyped="#passwordChanged" prefHeight="26.0" prefWidth="186.0" promptText="Upper and lower case, 5-12 characters" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets left="10.0" right="120.0" />
+                  <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </PasswordField>
-            <Label layoutX="471.0" layoutY="90.0" text="Is Admin:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label layoutX="471.0" layoutY="90.0" text="Is Admin:" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="70.0" />
                </GridPane.margin>
             </Label>
-            <ChoiceBox fx:id="isAdminCBox" layoutX="532.0" layoutY="85.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ChoiceBox fx:id="isAdminCBox" layoutX="532.0" layoutY="85.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </ChoiceBox>
-            <Label fx:id="validationLabel" textFill="#ed0404" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Label fx:id="validationLabelName" textFill="#f70101" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="validationLabelSalary" textFill="#fa0303" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="validationaLabelEmail" fx:id="validationLabelEmail" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="validationLabelPhone" fx:id="validationLabelPhone" textFill="#f30303" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="validationLabelPassword" fx:id="validationLabelPassword" textFill="#fa0202" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
             </children>
         </GridPane>
     </center>

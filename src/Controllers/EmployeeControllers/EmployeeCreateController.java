@@ -7,6 +7,7 @@ import DAO.TitleDAO;
 import Models.Credentials;
 import Models.Employee;
 import Models.Title;
+import Utilities.SceneSwitchUtility;
 import Utilities.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -41,15 +41,21 @@ public class EmployeeCreateController implements Initializable, IController {
     @FXML
     private Button CancelButton;
     @FXML
-    private Label validationLabel;
+    private Label validationLabelName;
+    @FXML
+    private Label validationLabelPhone;
+    @FXML
+    private Label validationLabelEmail;
+    @FXML
+    private Label validationLabelSalary;
+    @FXML
+    private Label validationLabelPassword;
+    private ObservableList<Label> validators = FXCollections.observableArrayList();
 
     private LoginDAO loginDAO;
     private EmployeeDAO employeeDAO;
     private TitleDAO titleDAO;
     private ObservableList<Title> titleList = FXCollections.observableArrayList();
-    private List<Integer> pInd = new ArrayList<Integer>(List.of(1,2,3,8,9,10,14,15,16,17));
-    private StringBuilder fNum = new StringBuilder("(###) - ### - ####");
-    private String phoneText = "";
     private int i = 0;
     private Credentials credentials;
     private List<String> p = FXCollections.observableArrayList();
@@ -70,12 +76,23 @@ public class EmployeeCreateController implements Initializable, IController {
             e.printStackTrace();
             e.getErrorCode();
         }
+        validators.add(validationLabelName);
+        validators.add(validationLabelPhone);
+        validators.add(validationLabelSalary);
+        validators.add(validationLabelEmail);
     }
 
     @FXML
     public void AddButtonOnAction() throws IOException, SQLException
     {
-        if (validationLabel.getText() == "") {
+        boolean verified = true;
+        for (Label v : validators) {
+            if (v.getText() != "") {
+                verified = false;
+                break;
+            };
+        }
+        if (verified) {
             String name = NameText.getText();
             String phone = PhoneText.getText();
             String email = EmailText.getText();
@@ -102,41 +119,54 @@ public class EmployeeCreateController implements Initializable, IController {
 
                 }
             } catch (IllegalArgumentException e) {
-                validationLabel.setText(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }
 
     @FXML
     public void CancelButtonOnAction() throws IOException {
-        Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-        currentStage.close();
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/EmployeeViews/EmployeeInfoView.fxml",
+                        CancelButton,
+                        new EmployeeInfoController(),
+                        credentials,
+                        null,
+                        null
+                );
     }
     @FXML
     public void phoneChanged() {
 
-        Validator.validatePhone(PhoneText, validationLabel);
+        Validator.validatePhone(PhoneText, validationLabelPhone);
         PhoneText.positionCaret(PhoneText.getText().length());
+        validators.set(1, validationLabelPhone);
+
 
     }
     @FXML
     public void emailChanged() {
 
-        Validator.validateEmail(EmailText, validationLabel);
+        Validator.validateEmail(EmailText, validationLabelEmail);
         EmailText.positionCaret(EmailText.getText().length());
+        validators.set(3, validationLabelEmail);
+
 
     }
     @FXML
     public void salaryChanged() {
 
-        Validator.validateSalary(SalaryText, validationLabel);
+        Validator.validateSalary(SalaryText, validationLabelSalary);
         SalaryText.positionCaret(SalaryText.getText().length());
+        validators.set(2, validationLabelSalary);
+
 
     }
     @FXML
     public void passwordChanged() {
 
-        Validator.validatePassword(Password.getText(), validationLabel);
+        Validator.validatePassword(Password.getText(), validationLabelPassword);
         SalaryText.positionCaret(SalaryText.getText().length());
 
     }

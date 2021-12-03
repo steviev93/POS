@@ -15,12 +15,16 @@ public class SceneSwitchUtility {
     private Button utilButton;
     private IController controller;
     private Credentials c;
+    private String oldScenePath;
+    private IController oldController;
 
-    public SceneSwitchUtility(String newScenePath, Button utilButton, IController controller, Credentials c) {
+    public SceneSwitchUtility(String newScenePath, Button utilButton, IController controller, Credentials c, String oldScenePath, IController oldController) {
         this.newScenePath = newScenePath;
         this.utilButton = utilButton;
         this.controller = controller;
+        this.oldController = oldController;
         this.c = c;
+        this.oldScenePath = oldScenePath;
         FXMLLoader loader = new FXMLLoader(
                 getClass().getClassLoader().getResource(
                         newScenePath
@@ -37,33 +41,12 @@ public class SceneSwitchUtility {
         controller = loader.getController();
         controller.loadCredentials(c);
 
-        if(newScenePath=="Views/MainWindow1.fxml") stage.setMaximized(true);
+        if (newScenePath == "Views/MainWindow1.fxml") stage.setMaximized(true);
+
         stage.show();
-    }
-
-    public FXMLLoader LoadContent(String newScenePath, Button utilButton) throws IOException {
-        this.newScenePath = newScenePath;
-        this.utilButton = utilButton;
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getClassLoader().getResource(
-                        newScenePath
-                )
-        );
-        return loader;
+        ((Stage)utilButton.getScene().getWindow()).close();
 
 
     }
 
-    public void SwitchScreen(FXMLLoader loader, IController controller, Credentials c) throws IOException {
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(
-                new Scene(loader.load())
-        );
-        controller = loader.getController();
-        controller.loadCredentials(c);
-
-        if(newScenePath=="Views/MainWindow1.fxml") stage.setMaximized(true);
-        stage.show();
-
-    }
 }

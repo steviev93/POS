@@ -51,10 +51,18 @@ public class LoginController implements IController {
             loginLabel.setText("Login Successful!");
             loginLabel.setVisible(true);
             TimeUnit.SECONDS.sleep(2);
+            SceneSwitchUtility sceneSwitch =
+                    new SceneSwitchUtility(
+                            "Views/MainWindow1.fxml",
+                            loginButton,
+                            new MainWindowController(),
+                            result,
+                            null,
+                            null
+                    );
             Stage currentStage = (Stage) loginButton.getScene().getWindow();
             currentStage.close();
-            SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-            sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/MainWindow1.fxml", loginButton), new MainWindowController(), result);
+
 
         }
         else loginLabel.setText("Login Failed");

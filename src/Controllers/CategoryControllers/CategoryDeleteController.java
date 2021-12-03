@@ -35,16 +35,28 @@ public class CategoryDeleteController implements IController {
     public void DeleteButtonOnAction(ActionEvent event) throws SQLException, IOException {
         CategoryDAO categoryDAO = new CategoryDAO();
         categoryDAO.Delete(category);
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", CancelButton), new UpdateMenuController(), credentials);
-
-
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/UpdateMenuView.fxml",
+                        CancelButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        null,
+                        null
+                );
     }
     @FXML
     public void CancelButtonOnAction() throws IOException
     {
-        SceneSwitchUtility sceneSwitch = new SceneSwitchUtility();
-        sceneSwitch.SwitchScreen(sceneSwitch.LoadContent("Views/Admin/UpdateMenuView.fxml", CancelButton), new UpdateMenuController(), credentials);
+        SceneSwitchUtility sceneSwitch =
+                new SceneSwitchUtility(
+                        "Views/Admin/UpdateMenuView.fxml",
+                        CancelButton,
+                        new UpdateMenuController(),
+                        credentials,
+                        null,
+                        null
+                );
     }
 
     @Override
